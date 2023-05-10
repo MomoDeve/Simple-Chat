@@ -16,15 +16,16 @@
         <label for="username-input">Welcome to the chat! Enter your name below:</label>
         <div style="display: flex">
             <textarea id="username-input" class="usernameInputField" placeholder="name" maxlength="25"></textarea>
-            <button onclick="globalThis.client.connectToServer(document.getElementById('username-input').value)">join
+            <button id="username-input-button" onclick="globalThis.client.connectToServer(document.getElementById('username-input').value)">join
             </button>
         </div>
     </div>
+    <span class="error" id="error"></span>
     <div id="chat-page" style="visibility: hidden">
         <textarea id="chat" class="chatWindow" readonly></textarea>
         <div style="display: flex">
             <textarea id="message-input" class="chatInputField" placeholder="write here" maxlength="25"></textarea>
-            <button onclick="globalThis.client.sendMessage(document.getElementById('message-input').value)">send
+            <button id="message-input-button" onclick="globalThis.client.sendMessage(document.getElementById('message-input').value)">send
             </button>
         </div>
     </div>

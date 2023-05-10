@@ -1,18 +1,29 @@
 import { getUserNameMessage, getSendPublicMessage, getSendPrivateMessage, RESPONSE_TYPE } from './protocol.js';
-import { onNicknameSet, onNicknameInvalid, onHistoryAppend, onMessageSend, onMessageInvalid } from './callbacks.js';
+import { onNicknameSet, onNicknameInvalid, onHistoryAppend, onMessageSend, onMessageInvalid, onConnectionFailed, onConnectionSuccess } from './callbacks.js';
 
 const SERVER_ADDRESS = 'ws://127.0.0.1:8090';
+const RECONNECT_DELAY = 10000;
 
 export class Client {
     constructor() {
         this.webSocket = undefined;
     }
 
+    reconnectToServer(username) {
+        setTimeout(() => this.connectToServer(username), RECONNECT_DELAY);
+        onConnectionFailed(RECONNECT_DELAY);
+    }
+
     connectToServer(username) {
-        this.userName = username;
         this.webSocket = new WebSocket(SERVER_ADDRESS);
-        this.webSocket.onopen = () => this.webSocket.send(getUserNameMessage(username));
+        this.webSocket.onclose = () => this.reconnectToServer(username);
+        this.webSocket.onopen = () => this.onConnectToServer(username);
         this.webSocket.onmessage = (e) => this.messageHandler(e.data);
+    }
+
+    onConnectToServer(username) {
+        this.webSocket.send(getUserNameMessage(username));
+        onConnectionSuccess();
     }
 
     sendMessage(text) {
