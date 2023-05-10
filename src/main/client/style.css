@@ -1,0 +1,20 @@
+label {
+    display: block;
+}
+
+.usernameInputField {
+    resize: none;
+    height: 1rem;
+}
+
+.chatInputField {
+    resize: none;
+    height: 1rem;
+    width: 50rem;
+}
+
+.chatWindow {
+    resize: none;
+    height: 10rem;
+    width: 50rem;
+}

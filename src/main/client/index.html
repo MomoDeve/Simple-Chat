@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+</head>
+<script type="module" src="index.js"></script>
+<body>
+<main>
+    <body>
+    <div id="username-page" style="visibility: visible">
+        <label for="username-input">Welcome to the chat! Enter your name below:</label>
+        <div style="display: flex">
+            <textarea id="username-input" class="usernameInputField" placeholder="name" maxlength="25"></textarea>
+            <button onclick="globalThis.client.connectToServer(document.getElementById('username-input').value)">join
+            </button>
+        </div>
+    </div>
+    <div id="chat-page" style="visibility: hidden">
+        <textarea id="chat" class="chatWindow" readonly></textarea>
+        <div style="display: flex">
+            <textarea id="message-input" class="chatInputField" placeholder="write here" maxlength="25"></textarea>
+            <button onclick="globalThis.client.sendMessage(document.getElementById('message-input').value)">send
+            </button>
+        </div>
+    </div>
+    </body>
+</main>
+</body>
+</html>
